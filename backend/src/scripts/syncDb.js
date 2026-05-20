@@ -9,16 +9,16 @@ async function syncDatabase() {
   try {
     // 1. Connect directly to MySQL server without selecting a database
     connection = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT || 3306,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      host: process.env.MYSQLHOST || process.env.DB_HOST,
+      port: process.env.MYSQLPORT || process.env.DB_PORT || 3306,
+      user: process.env.MYSQLUSER || process.env.DB_USER,
+      password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD
     });
 
     console.log('[Database Sync]: Connected to MySQL server.');
 
     // 2. Create the database if it doesn't already exist
-    const dbName = process.env.DB_NAME || 'team_task_manager';
+    const dbName = process.env.MYSQLDATABASE || process.env.DB_NAME || 'team_task_manager';
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\`;`);
     console.log(`[Database Sync]: Database "${dbName}" checked/created.`);
   } catch (error) {
