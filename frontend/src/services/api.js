@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // Base API configuration
 const API = axios.create({
-  // Fallbacks to port 5000 if VITE_API_URL is missing
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  // Fallbacks to relative /api if VITE_API_URL is missing
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json'
   }
